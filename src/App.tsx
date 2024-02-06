@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Home } from './pages/Home';
+import { Crud } from './pages/Crud';
+
+const App = ()=>{
+
+    const navigate = useNavigate();
+    
+    return (
+
+        <div className="main">
+
+            <header className="h-24 bg-gray-800">
+                <div className="h-full flex container items-center justify-between mx-auto">
+                    <div className="brand">
+                       <h3 className="text-white font-bold text-xl">H7Mídia - Cadastro Veicular</h3> 
+                    </div>
+                    <button onClick={()=>navigate('/cadastro')} className="rounded p-3 text-white bg-gray-400 px-5">Cadastrar</button>
+                </div>
+            </header>
+
+            <div className='container mx-auto mt-5'>
+                <Routes>
+                    <Route path='/' element={<Home />}/>
+                    <Route path='/cadastro' element={<Crud />}/>
+                    <Route path='/editar/:id' element={<Crud />}/>
+                </Routes>
+            </div>
+
+            
+        </div>
+    );
 }
 
 export default App;
